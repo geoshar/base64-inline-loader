@@ -6,7 +6,6 @@ let files = [
 	'./cache/index.css',
 	'./expected/index.css'
 ];
-
 let actual, expected;
 
 describe('Default test', () => {

@@ -9,7 +9,7 @@ module.exports = function (content) {
 		this.cacheable();
 	}
 
-	let query = loaderUtils.parseQuery(this.query);
+	let query = loaderUtils.getOptions(this);
 
 	let extension = loaderUtils.interpolateName(this, '[ext]', {
 		context: query.context || this.options.context,
@@ -29,9 +29,11 @@ module.exports = function (content) {
 	let { limit = 0 } = query;
 
 	try {
-		({ dataUrlLimit: limit } = this.options.url);
-	}
-	catch (error) { }
+            ({dataUrlLimit: limit} = this.options.url);
+        }
+        catch (error) {
+           // throw new Error('something bad happened:' + error);
+        }
 
 	if (limit <= 0 || content.length < limit) {
 		let url = JSON.stringify(`data:${type};charset=utf-8;base64,${data}`);
